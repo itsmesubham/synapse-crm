@@ -175,6 +175,8 @@ You need Docker, docker-compose and git setup on your machine. Refer [Docker doc
 -   Username: Administrator
 -   Password: admin
 
+ 
+
 ## Learn and connect
 
 -   [Telegram Public Group](https://t.me/frappecrm)
@@ -193,3 +195,17 @@ You need Docker, docker-compose and git setup on your machine. Refer [Docker doc
 		</picture>
 	</a>
 </div>
+
+## Lead Generation API
+
+Use the `leadgen_api` service to automate voice campaigns.
+Example to upload leads:
+```bash
+curl -X POST http://localhost:8000/leads -H "Content-Type: application/json" -d '[{"name":"John","phone_number":"+15555555555","campaign_id":1}]'
+```
+Create a campaign and start calling:
+```bash
+curl -X POST http://localhost:8000/campaigns -H "Content-Type: application/json" -d '{"title":"Demo","description":"Product demo","call_script":"Hello {name}, check our {context}"}'
+curl -X POST http://localhost:8000/campaigns/1/start
+```
+Set `FRAPPE_SITE` to your CRM site to sync leads and call logs with Frappe.
